@@ -34,13 +34,10 @@
   }
   burger.addEventListener("click", function(){ toggleMenu(); });
   backdrop.addEventListener("click", function(){ toggleMenu(false); });
+  document.getElementById("mClose").addEventListener("click", function(){ toggleMenu(false); });
   document.querySelectorAll(".mobile-menu a").forEach(function(a){
     a.addEventListener("click", function(){ toggleMenu(false); });
   });
-
-  /* ---- Marquee: duplicar contenido para loop infinito ---- */
-  var track = document.getElementById("marqueeTrack");
-  track.innerHTML += track.innerHTML;
 
   /* ---- Reveal on scroll ---- */
   var revealIO = new IntersectionObserver(function(entries){
