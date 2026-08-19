@@ -4,13 +4,13 @@
   --ink:#141414;
   --gold:#FFB703; --gold-deep:#B8860B; --gold2:#F4A261;
   --pink:#E60067; --pink2:#FF2A85;
-  --gray:#4B5563; --gray2:#6B7280;
+  --gray:#3A4149; --gray2:#525C66;
   --fd:'Montserrat',sans-serif; --fb:'Poppins',sans-serif;
   --ease:cubic-bezier(.22,1,.36,1);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:80px}
-body{background:var(--bg);color:var(--ink);font-family:var(--fb);font-weight:300;line-height:1.7;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--ink);font-family:var(--fb);font-weight:400;line-height:1.7;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
 ::selection{background:var(--pink);color:#fff}
 ::-webkit-scrollbar{width:10px}
 ::-webkit-scrollbar-track{background:#f4f2ec}
@@ -134,15 +134,6 @@ body.menu-open .menu-backdrop{opacity:1;pointer-events:auto}
 .about-img .frame{position:absolute;top:16px;left:16px;right:-16px;bottom:-16px;border:1px solid rgba(230,0,103,.45);border-radius:6px;z-index:-1}
 .about-text{margin:2.2rem 0;color:var(--gray)}
 .about-text p+p{margin-top:1rem}
-.about-text strong{color:var(--ink);font-weight:500}
-.hitos{display:flex;flex-direction:column;gap:1rem;margin-top:1.6rem}
-.hito{display:flex;gap:1.1rem;align-items:flex-start;background:#FBFAF6;border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:4px;padding:1.2rem 1.3rem;transition:transform .35s var(--ease),border-color .3s,box-shadow .35s}
-.hito:nth-child(2){border-left-color:var(--pink)}
-.hito:hover{transform:translateX(8px);border-color:rgba(184,134,11,.5);box-shadow:0 16px 40px -22px rgba(230,0,103,.35)}
-.hito-tag{flex:none;font-family:var(--fd);font-weight:800;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:#171000;background:linear-gradient(120deg,var(--gold),var(--gold2));padding:.35rem .6rem;border-radius:2px;margin-top:.2rem}
-.hito:nth-child(2) .hito-tag{background:linear-gradient(120deg,var(--pink),var(--pink2));color:#fff}
-.hito h3{font-size:.95rem;letter-spacing:.08em;margin-bottom:.3rem}
-.hito p{font-size:.88rem;color:var(--gray2)}
 
 /* ============ TALLERES (móvil) ============ */
 .talleres{padding:clamp(5rem,10vw,8.5rem) 0;background:var(--bg2);border-block:1px solid #EFEAE0}
@@ -318,9 +309,13 @@ body.menu-open .menu-backdrop{opacity:1;pointer-events:auto}
 
 /* ============ ESCRITORIO GRANDE (min 1024px) ============ */
 @media(min-width:1024px){
-  .about-grid{grid-template-columns:1fr 1.1fr}
+  .about{padding:clamp(3rem,5vh,4.5rem) 0;height:100vh;display:flex;align-items:center}
+  .about-grid{grid-template-columns:1fr 1.1fr;height:100%}
+  .about-flow{display:flex;flex-direction:column;gap:1.6rem;height:100%;min-height:0}
+  .about-img{flex:1;min-height:0;margin:0}
+  .about-img img{height:100%;width:100%;object-fit:cover}
+  .about-text{margin:0}
   .about-sticky{position:sticky;top:110px}
-  .about-img img{height:440px}
   .tall-pilares{grid-template-columns:repeat(4,1fr)}
   .con-grid{grid-template-columns:1.1fr .9fr}
   .foot-grid{grid-template-columns:1.4fr 1fr 1fr;gap:3rem}
