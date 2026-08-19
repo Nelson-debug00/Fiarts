@@ -54,7 +54,6 @@ section{position:relative}
 .btn-gold:hover{box-shadow:0 18px 40px -14px rgba(255,183,3,.85)}
 .btn-pink-line{border:1px solid var(--pink);color:var(--ink);background:rgba(230,0,103,.05)}
 .btn-pink-line:hover{background:var(--pink);color:#fff;box-shadow:0 16px 36px -14px rgba(230,0,103,.55)}
-.btn-grad{background:linear-gradient(120deg,var(--pink),var(--gold));color:#170a10;box-shadow:0 12px 32px -12px rgba(230,0,103,.5)}
 .btn svg{width:18px;height:18px;flex:none}
 
 /* ============ HEADER (móvil: hamburguesa) ============ */
@@ -206,12 +205,14 @@ body.menu-open .menu-backdrop{opacity:1;pointer-events:auto}
 .lb-next:hover{transform:translateY(-50%) scale(1.08)}
 
 /* ============ CTA BAND (móvil) ============ */
-.cta-band{padding:clamp(4rem,8vw,6.5rem) 0;background:linear-gradient(120deg,rgba(230,0,103,.07),rgba(255,183,3,.1));border-block:1px solid rgba(184,134,11,.3);position:relative;overflow:hidden}
-.cta-band::before{content:"FIARTS";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--fd);font-weight:900;font-size:clamp(6rem,22vw,17rem);color:transparent;-webkit-text-stroke:1px rgba(20,20,20,.06);letter-spacing:.1em;pointer-events:none}
-.cta-inner{display:flex;flex-direction:column;align-items:flex-start;gap:2rem;position:relative;z-index:2}
-.cta-inner h2{font-size:clamp(1.8rem,4vw,3rem);font-weight:900}
-.cta-inner h2 em{color:var(--gold-deep);font-style:italic}
-.cta-inner p{color:var(--gray);max-width:460px;margin-top:.8rem}
+.cta-band{padding:clamp(2rem,5vw,3rem) 0}
+.cta-inner{display:flex;flex-direction:column;gap:1.5rem;align-items:flex-start;background:#171011;border-radius:8px;padding:2.2rem 2rem;position:relative;overflow:hidden}
+.cta-inner::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 110% at 92% 0%,rgba(230,0,103,.38),transparent 60%),radial-gradient(55% 110% at 6% 100%,rgba(255,183,3,.28),transparent 62%);pointer-events:none}
+.cta-inner>*{position:relative}
+.cta-inner .kicker{color:var(--gold)}
+.cta-inner h2{font-size:clamp(1.8rem,4vw,3rem);font-weight:900;color:#fff;margin:0}
+.cta-inner h2 em{color:var(--gold);font-style:italic}
+.cta-inner p{color:rgba(255,255,255,.88);max-width:460px;margin-top:.8rem}
 
 /* ============ CONTACTO (móvil) ============ */
 .contacto{padding:clamp(5rem,10vw,8.5rem) 0;background:var(--bg)}
