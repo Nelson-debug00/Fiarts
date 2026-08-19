@@ -27,6 +27,36 @@
   window.addEventListener("scroll", onScroll, {passive:true});
   onScroll();
 
+  if(ind){
+    var isDragging = false, startY = 0, startScrollY = 0;
+    ind.addEventListener("pointerdown", function(e){
+      isDragging = true;
+      startY = e.clientY;
+      startScrollY = window.scrollY;
+      ind.classList.add("dragging");
+      document.documentElement.classList.add("is-dragging-scroll");
+      e.preventDefault();
+    });
+    window.addEventListener("pointermove", function(e){
+      if(!isDragging) return;
+      e.preventDefault();
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      var ratio = h > 0 ? h / (window.innerHeight - indH) : 0;
+      var deltaY = e.clientY - startY;
+      window.scrollTo(0, startScrollY + deltaY * ratio);
+    }, {passive:false});
+    window.addEventListener("pointerup", function(){
+      isDragging = false;
+      ind.classList.remove("dragging");
+      document.documentElement.classList.remove("is-dragging-scroll");
+    });
+    window.addEventListener("pointercancel", function(){
+      isDragging = false;
+      ind.classList.remove("dragging");
+      document.documentElement.classList.remove("is-dragging-scroll");
+    });
+  }
+
   /* ---- Menú móvil ---- */
   var burger = document.getElementById("hamburger"),
       backdrop = document.getElementById("menuBackdrop");
