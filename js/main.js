@@ -136,22 +136,4 @@
     if(e.key === "ArrowLeft") openLb(lbIndex - 1);
     if(e.key === "ArrowRight") openLb(lbIndex + 1);
   });
-
-  /* ---- Formulario de contacto ---- */
-  var form = document.getElementById("contactForm"),
-      formOk = document.getElementById("formOk");
-  form.addEventListener("submit", function(e){
-    e.preventDefault();
-    var nombre = document.getElementById("fNombre").value.trim(),
-        tel = document.getElementById("fTel").value.trim(),
-        taller = document.getElementById("fTaller").value;
-    if(!nombre || !tel || !taller){
-      formOk.textContent = "✦ Por favor completa nombre, teléfono y taller de interés.";
-      formOk.classList.add("show");
-      return;
-    }
-    formOk.textContent = "✦ ¡Gracias, " + nombre + "! Recibimos tu solicitud para \"" + taller + "\". Te responderemos muy pronto por WhatsApp.";
-    formOk.classList.add("show");
-    form.reset();
-  });
 })();
