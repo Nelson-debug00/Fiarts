@@ -252,8 +252,8 @@ body.menu-open .menu-backdrop{opacity:1;pointer-events:auto}
 .foot-social a{width:44px;height:44px;border:1px solid #E2DDD2;border-radius:4px;display:grid;place-items:center;color:#57534E;transition:all .3s;background:#fff}
 .foot-social a:hover{border-color:var(--pink);color:#fff;background:var(--pink);transform:translateY(-4px);box-shadow:0 10px 24px -12px rgba(230,0,103,.6)}
 .foot-social svg{width:18px;height:18px}
-.foot-bottom{border-top:1px solid #E8E3D9;padding:1.4rem 0;display:flex;flex-wrap:wrap;justify-content:space-between;gap:.8rem;font-size:.76rem;color:var(--gray2);letter-spacing:.06em}
-.foot-bottom b{color:var(--gold-deep);font-weight:500}
+.foot-bottom{border-top:1px solid #E8E3D9;padding:1.4rem 0;flex-wrap:wrap;justify-content:space-between;gap:.8rem;font-size:.76rem;color:var(--gray2);letter-spacing:.06em; text-align: center;}
+.foot-bottom b{color:black;font-weight:500}
 
 /* WhatsApp flotante */
 .wa-float{position:fixed;right:22px;bottom:22px;z-index:1200;width:56px;height:56px;border-radius:50%;background:rgba(37,211,102,.88);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.5);box-shadow:0 14px 34px -12px rgba(37,211,102,.55),inset 0 1px 0 rgba(255,255,255,.55);display:grid;place-items:center;transition:transform .3s var(--ease),box-shadow .3s}
