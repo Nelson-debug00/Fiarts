@@ -8,13 +8,17 @@
   /* ---- Header scroll + barra de progreso ---- */
   var header = document.getElementById("siteHeader"),
       bar = document.getElementById("progressBar"),
+      ind = document.getElementById("scrollIndicator"),
+      indH = 96,
       ticking = false;
   function onScroll(){
     if(!ticking){
       window.requestAnimationFrame(function(){
         header.classList.toggle("scrolled", window.scrollY > 40);
         var h = document.documentElement.scrollHeight - window.innerHeight;
-        bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + "%";
+        var p = h > 0 ? window.scrollY / h : 0;
+        bar.style.width = (p * 100) + "%";
+        ind.style.transform = "translateY(" + (p * (window.innerHeight - indH)) + "px)";
         ticking = false;
       });
       ticking = true;
