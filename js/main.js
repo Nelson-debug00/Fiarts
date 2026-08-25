@@ -24,6 +24,69 @@
       ticking = true;
     }
   }
+
+  /* ---- Drag to scroll en el indicador de scroll ---- */
+  var isDragging = false;
+  function handleDrag(clientY) {
+    var totalHeight = window.innerHeight;
+    var availableTrack = totalHeight - indH;
+    if (availableTrack <= 0) return;
+    
+    var targetY = clientY - (indH / 2);
+    targetY = Math.max(0, Math.min(targetY, availableTrack));
+    
+    var percentage = targetY / availableTrack;
+    var scrollTarget = percentage * (document.documentElement.scrollHeight - totalHeight);
+    
+    // Temporariamente quitamos la transición de scroll suave si existe
+    document.documentElement.style.scrollBehavior = "auto";
+    window.scrollTo({
+      top: scrollTarget,
+      behavior: "auto" // 'auto' es instantáneo para evitar retrasos al arrastrar
+    });
+  }
+
+  ind.addEventListener("mousedown", function(e){
+    isDragging = true;
+    document.documentElement.style.scrollBehavior = "auto";
+    handleDrag(e.clientY);
+    e.preventDefault();
+  });
+
+  window.addEventListener("mousemove", function(e){
+    if (isDragging) {
+      handleDrag(e.clientY);
+    }
+  });
+
+  window.addEventListener("mouseup", function(){
+    if (isDragging) {
+      isDragging = false;
+      // Restauramos el comportamiento suave por defecto para clics/anclas del menú
+      document.documentElement.style.scrollBehavior = "";
+    }
+  });
+
+  // Soporte para gestos táctiles (móvil)
+  ind.addEventListener("touchstart", function(e){
+    isDragging = true;
+    document.documentElement.style.scrollBehavior = "auto";
+    if(e.touches.length > 0) {
+      handleDrag(e.touches[0].clientY);
+    }
+    e.preventDefault();
+  }, {passive: false});
+
+  window.addEventListener("touchmove", function(e){
+    if (isDragging && e.touches.length > 0) {
+      handleDrag(e.touches[0].clientY);
+    }
+  }, {passive: true});
+
+  window.addEventListener("touchend", function(){
+    isDragging = false;
+    document.documentElement.style.scrollBehavior = "";
+  });
   window.addEventListener("scroll", onScroll, {passive:true});
   onScroll();
 
@@ -71,28 +134,6 @@
     });
   }, {threshold:.6});
   document.querySelectorAll(".count").forEach(function(el){ countIO.observe(el); });
-
-  /* ---- Efecto scramble/decode en kicker del hero ---- */
-  var scrambleEl = document.getElementById("scrambleKicker");
-  if(scrambleEl && !reduced){
-    var finalText = scrambleEl.getAttribute("data-text"),
-        glyphs = "✦#%&@*<>/+=?",
-        frame = 0, total = finalText.length * 3 + 12;
-    setTimeout(function tickStart(){
-      (function tick(){
-        var out = "";
-        for(var i = 0; i < finalText.length; i++){
-          var ch = finalText[i];
-          if(ch === " " || ch === "·"){ out += ch; continue; }
-          out += (i < frame / 3) ? ch : glyphs[Math.floor(Math.random() * glyphs.length)];
-        }
-        scrambleEl.textContent = out;
-        frame++;
-        if(frame <= total) window.requestAnimationFrame(tick);
-        else scrambleEl.textContent = finalText;
-      })();
-    }, 500);
-  }
 
   /* ---- Nav activo según sección visible ---- */
   var navLinks = document.querySelectorAll(".main-nav a");
