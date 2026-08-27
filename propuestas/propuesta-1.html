@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propuesta 1 · Talleres FIARTS — Cabecera centrada con destacados</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+/* =========================================================
+   PROPUESTA 1 — Cabecera CENTRADA con banda de destacados
+   Reutiliza el estilo y las tarjetas actuales del sitio.
+   ========================================================= */
+.prop1 .tall-head{text-align:center;align-items:center;max-width:760px;margin-inline:auto}
+.prop1 .tall-head .tall-kicker{display:inline-flex;align-items:center;gap:.7rem;font-family:var(--fd);font-weight:800;font-size:.68rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:1rem}
+.prop1 .tall-head .tall-kicker::before,.prop1 .tall-head .tall-kicker::after{content:"";width:34px;height:2px;background:linear-gradient(90deg,var(--gold),var(--pink))}
+.prop1 .tall-head .tall-kicker::after{background:linear-gradient(270deg,var(--gold),var(--pink))}
+.prop1 .tall-head .sec-title em{font-style:italic;color:var(--pink)}
+.prop1 .tall-head p{color:var(--gray2);font-size:1rem;line-height:1.8;max-width:560px;margin:.3rem auto 0}
+.prop1 .tall-highlights{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;margin-top:2.2rem}
+.prop1 .th-chip{display:inline-flex;align-items:center;gap:.55rem;font-family:var(--fd);font-weight:700;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);background:var(--panel);border:1px solid var(--line);padding:.6rem 1.1rem;border-radius:999px;transition:all .35s var(--ease);box-shadow:0 4px 14px -10px rgba(20,20,20,.2)}
+.prop1 .th-chip svg{width:15px;height:15px;color:var(--gold-deep);flex:none}
+.prop1 .th-chip:nth-child(even) svg{color:var(--pink)}
+.prop1 .th-chip:hover{transform:translateY(-3px);border-color:rgba(230,0,103,.5);box-shadow:0 12px 24px -14px rgba(230,0,103,.5)}
+
+/* bajo la cabecera, una línea divisoria decorativa */
+.prop1 .tall-divider{display:flex;align-items:center;gap:1rem;margin:2.6rem 0 3rem;color:var(--gold-deep)}
+.prop1 .tall-divider::before,.prop1 .tall-divider::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--line))}
+.prop1 .tall-divider::after{background:linear-gradient(270deg,transparent,var(--line))}
+.prop1 .tall-divider svg{width:18px;height:18px}
+
+/* adaptación para pantallas grandes: pilares en 4 columnas ya definido en el css */
+@media(max-width:768px){
+  .prop1 .tall-head .tall-kicker::before,.prop1 .tall-head .tall-kicker::after{width:20px}
+}
+</style>
+</head>
+<body style="background:var(--bg2)">
+<section class="talleres talleres-prop-1 prop1" id="talleres">
+
+  <!-- ===== PARTE SUPERIOR (PROPUESTA) ===== -->
+  <div class="container">
+    <div class="tall-head reveal">
+      <span class="tall-kicker reveal" style="--d:.05s">Talleres FIARTS</span>
+      <h2 class="sec-title reveal" style="--d:.12s">Crece con el arte,<br><em>paso a paso</em></h2>
+      <p class="reveal" style="--d:.22s">
+        No importa tu edad ni tu experiencia: cada taller es una invitación a mover el cuerpo, expresar la emoción y conectar con una comunidad apasionada por el movimiento. Descubre un espacio vivo de aprendizaje colectivo.
+      </p>
+      <div class="tall-highlights reveal" style="--d:.32s">
+        <span class="th-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>4 estilos de danza</span>
+        <span class="th-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>+200 estudiantes</span>
+        <span class="th-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>+40 presentaciones</span>
+        <span class="th-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Todas las edades</span>
+        <span class="th-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Niveles para todos</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="tall-divider reveal" style="--d:.4s">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M5 7l7-5 7 5M5 17l7 5 7-5"/></svg>
+  </div>
+
+  <!-- ===== TARJETAS (se mantienen como las originales) ===== -->
+  <div class="container">
+    <div class="tall-pilares">
+      <article class="taller-pilar reveal">
+        <span class="tp-num">01</span>
+        <div class="tp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+        <h3>Aprende</h3>
+        <p>Talleres para todas las edades y niveles: técnica, ritmo y expresión con un acompañamiento cercano desde tu primer día.</p>
+      </article>
+      <article class="taller-pilar reveal" style="--d:.12s">
+        <span class="tp-num">02</span>
+        <div class="tp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg></div>
+        <h3>Crece</h3>
+        <p>Cada taller es una meta nueva: ganas confianza, disciplina y seguridad para brillar dentro y fuera del escenario.</p>
+      </article>
+      <article class="taller-pilar reveal" style="--d:.24s">
+        <span class="tp-num">03</span>
+        <div class="tp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8l-6.2 3.2L7 14.2 2 9.3l6.9-1L12 2z"/></svg></div>
+        <h3>Brilla</h3>
+        <p>Vive la experiencia del montaje: galas, festivales y presentaciones que convierten tu esfuerzo en momentos inolvidables.</p>
+      </article>
+      <article class="taller-pilar reveal" style="--d:.36s">
+        <span class="tp-num">04</span>
+        <div class="tp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>Conecta</h3>
+        <p>Comparte con una comunidad que celebra el arte, hace amigos y camina contigo en cada paso de tu formación.</p>
+      </article>
+    </div>
+  </div>
+
+</section>
+<script src="../js/main.js"></script>
+</body>
+</html>

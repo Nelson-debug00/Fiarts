@@ -3,7 +3,8 @@
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---- Año dinámico ---- */
-  document.getElementById("yearNow").textContent = new Date().getFullYear();
+  var yearEl = document.getElementById("yearNow");
+  if(yearEl){ yearEl.textContent = new Date().getFullYear(); }
 
   /* ---- Header scroll + barra de progreso ---- */
   var header = document.getElementById("siteHeader"),
@@ -122,12 +123,17 @@
   function toggleMenu(force){
     var open = (typeof force === "boolean") ? force : !document.body.classList.contains("menu-open");
     document.body.classList.toggle("menu-open", open);
-    burger.setAttribute("aria-expanded", open);
+    if(burger){ burger.setAttribute("aria-expanded", open); }
     document.body.style.overflow = open ? "hidden" : "";
   }
-  burger.addEventListener("click", function(){ toggleMenu(); });
-  backdrop.addEventListener("click", function(){ toggleMenu(false); });
-  document.getElementById("mClose").addEventListener("click", function(){ toggleMenu(false); });
+  if(burger){
+    burger.addEventListener("click", function(){ toggleMenu(); });
+  }
+  if(backdrop){
+    backdrop.addEventListener("click", function(){ toggleMenu(false); });
+  }
+  var mClose = document.getElementById("mClose");
+  if(mClose){ mClose.addEventListener("click", function(){ toggleMenu(false); }); }
   document.querySelectorAll(".mobile-menu a").forEach(function(a){
     a.addEventListener("click", function(){ toggleMenu(false); });
   });
@@ -184,25 +190,31 @@
       lbCap = document.getElementById("lbCap"),
       lbIndex = 0;
   function openLb(i){
+    if(!lb) return;
     lbIndex = (i + gItems.length) % gItems.length;
     var img = gItems[lbIndex].querySelector("img");
-    lbImg.src = img.src;
-    lbImg.alt = img.alt;
-    lbCap.textContent = "";
+    if(lbImg){ lbImg.src = img.src; lbImg.alt = img.alt; }
+    if(lbCap){ lbCap.textContent = ""; }
     lb.classList.add("open");
     document.body.style.overflow = "hidden";
   }
   function closeLb(){
+    if(!lb) return;
     lb.classList.remove("open");
     document.body.style.overflow = "";
   }
   gItems.forEach(function(item, i){ item.addEventListener("click", function(){ openLb(i); }); });
-  document.getElementById("lbClose").addEventListener("click", closeLb);
-  document.getElementById("lbPrev").addEventListener("click", function(e){ e.stopPropagation(); openLb(lbIndex - 1); });
-  document.getElementById("lbNext").addEventListener("click", function(e){ e.stopPropagation(); openLb(lbIndex + 1); });
-  lb.addEventListener("click", function(e){ if(e.target === lb) closeLb(); });
+  var lbClose = document.getElementById("lbClose");
+  if(lbClose){ lbClose.addEventListener("click", closeLb); }
+  var lbPrev = document.getElementById("lbPrev");
+  if(lbPrev){ lbPrev.addEventListener("click", function(e){ e.stopPropagation(); openLb(lbIndex - 1); }); }
+  var lbNext = document.getElementById("lbNext");
+  if(lbNext){ lbNext.addEventListener("click", function(e){ e.stopPropagation(); openLb(lbIndex + 1); }); }
+  if(lb){
+    lb.addEventListener("click", function(e){ if(e.target === lb) closeLb(); });
+  }
   document.addEventListener("keydown", function(e){
-    if(!lb.classList.contains("open")) return;
+    if(!lb || !lb.classList.contains("open")) return;
     if(e.key === "Escape") closeLb();
     if(e.key === "ArrowLeft") openLb(lbIndex - 1);
     if(e.key === "ArrowRight") openLb(lbIndex + 1);

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propuesta 2 · Talleres FIARTS — Cabecera editorial dividida</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+/* =========================================================
+   PROPUESTA 2 — Cabecera DIVIDIDA (editorial)
+   Título a la izquierda, texto + CTA a la derecha,
+   con número de sección grande y línea de acento.
+   ========================================================= */
+.prop2 .tall-head{position:relative;display:grid;grid-template-columns:1fr;gap:1.8rem;margin-bottom:3.2rem;border-bottom:1px solid var(--line);padding-bottom:2.6rem}
+.prop2 .tall-head::before{content:"";position:absolute;left:0;bottom:0;width:92px;height:3px;background:linear-gradient(90deg,var(--gold),var(--pink))}
+
+.prop2 .tall-head-left .tall-idx{display:flex;align-items:center;gap:.9rem;font-family:var(--fd);font-weight:800;font-size:.68rem;letter-spacing:.34em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:1rem}
+.prop2 .tall-head-left .tall-idx::before{content:"";width:40px;height:2px;background:linear-gradient(90deg,var(--gold),var(--pink))}
+.prop2 .tall-head-left .sec-title{font-size:clamp(2rem,5vw,3.4rem)}
+.prop2 .tall-head-left .sec-title em{font-style:italic;color:var(--pink)}
+.prop2 .tall-head-left .sec-title .g{color:var(--gold-deep)}
+
+.prop2 .tall-head-right{display:flex;flex-direction:column;gap:1.3rem;align-items:flex-start}
+.prop2 .tall-head-right p{color:var(--gray2);font-size:1rem;line-height:1.85;max-width:520px}
+.prop2 .tall-head-right .tall-mini{display:flex;flex-wrap:wrap;gap:.6rem}
+.prop2 .tall-mini span{font-family:var(--fd);font-weight:700;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gray);border:1px solid var(--line);background:var(--panel);padding:.45rem .85rem;border-radius:999px}
+.prop2 .tall-mini span b{color:var(--gold-deep)}
+
+@media(min-width:720px){
+  .prop2 .tall-head{grid-template-columns:1.1fr 1fr;gap:3rem;align-items:end}
+}
+
+/* botón de acción bajo el texto derecho */
+.prop2 .tall-more{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--fd);font-weight:800;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);transition:gap .3s var(--ease),color .3s}
+.prop2 .tall-more svg{width:17px;height:17px;transition:transform .3s var(--ease)}
+.prop2 .tall-more:hover{gap:1rem;color:var(--gold-deep)}
+.prop2 .tall-more:hover svg{transform:translateX(3px)}
+
+@media(max-width:719px){
+  .prop2 .tall-head-right p{max-width:100%}
+}
+</style>
+</head>
+<body style="background:var(--bg2)">
+<section class="talleres talleres-prop-2 prop2" id="talleres">
+
+  <!-- ===== PARTE SUPERIOR (PROPUESTA) ===== -->
+  <div class="container">
+    <div class="tall-head reveal">
+      <div class="tall-head-left">
+        <span class="tall-kicker reveal" style="--d:.05s">02 · Talleres</span>
+        <h2 class="sec-title reveal" style="--d:.12s">Crecer con el<br>arte, <em>paso a paso</em></h2>
+      </div>
+      <div class="tall-head-right reveal" style="--d:.25s">
+        <p>
+          En FIARTS Studio los talleres son espacios vivos de aprendizaje colectivo.
+          No importa tu edad ni tu experiencia: cada sesión es una invitación a mover el cuerpo,
+          expresar la emoción y conectar con una comunidad apasionada por el movimiento.
+        </p>
+        <div class="tall-meta">
+          <span>Danza <b>Integral</b></span>
+          <span>Danza <b>Urbana</b></span>
+          <span>Tradicional</span>
+          <span>Contemporánea</span>
+          <span>Infantil</span>
+        </div>
+        <a class="tall-more" href="https://wa.me/584148975908?text=Hola,%20quiero%20informaci%C3%B3n%20sobre%20los%20talleres%20de%20FIARTS" target="_blank" rel="noopener">
+          Ver talleres y horarios
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TARJETAS (se mantienen como las originales) ===== -->
+  <div class="container">
+    <div class="tall-pilares">
+      <article class="taller-pilar reveal">
+        <span class="tp-num">01</span>
+        <div class="tp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+        <h3>Aprende</h3>
+        <p>Talleres para todas las edades y niveles: técnica, ritmo y expresión con un acompañamiento cercano desde tu primer día.</p>
+      </article>
+      <article class="taller-pilar reveal" style="--d:.12s">
+        <span class="tp-num">02</span>
+        <div class="tp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg></div>
+        <h3>Crece</h3>
+        <p>Cada taller es una meta nueva: ganas confianza, disciplina y seguridad para brillar dentro y fuera del escenario.</p>
+      </article>
+      <article class="taller-pilar reveal" style="--d:.24s">
+        <span class="tp-num">03</span>
+        <div class="tp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8l-6.2 3.2L7 14.2 2 9.3l6.9-1L12 2z"/></svg></div>
+        <h3>Brilla</h3>
+        <p>Vive la experiencia del montaje: galas, festivales y presentaciones que convierten tu esfuerzo en momentos inolvidables.</p>
+      </article>
+      <article class="taller-pilar reveal" style="--d:.36s">
+        <span class="tp-num">04</span>
+        <div class="tp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>Conecta</h3>
+        <p>Comparte con una comunidad que celebra el arte, hace amigos y camina contigo en cada paso de tu formación.</p>
+      </article>
+    </div>
+  </div>
+
+</section>
+<script src="../js/main.js"></script>
+</body>
+</html>
