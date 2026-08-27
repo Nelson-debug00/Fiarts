@@ -14,107 +14,76 @@
   function onScroll(){
     if(!ticking){
       window.requestAnimationFrame(function(){
-        header.classList.toggle("scrolled", window.scrollY > 40);
-        var h = document.documentElement.scrollHeight - window.innerHeight;
+        var scrollY = window.scrollY;
+        header.classList.toggle("scrolled", scrollY > 40);
+        if (ind) {
+          var h = document.documentElement.scrollHeight - window.innerHeight;
+          var pct = h > 0 ? scrollY / h : 0;
+          var trackH = window.innerHeight - indH;
+          ind.style.setProperty("--scroll-y", (pct * trackH) + "px");
+        }
         ticking = false;
       });
       ticking = true;
     }
   }
 
-  /* ---- Drag to scroll en el indicador de scroll ---- */
-  var isDragging = false;
-  function handleDrag(clientY) {
-    var totalHeight = window.innerHeight;
-    var availableTrack = totalHeight - indH;
-    if (availableTrack <= 0) return;
-    
-    var targetY = clientY - (indH / 2);
-    targetY = Math.max(0, Math.min(targetY, availableTrack));
-    
-    var percentage = targetY / availableTrack;
-    var scrollTarget = percentage * (document.documentElement.scrollHeight - totalHeight);
-    
-    // Temporariamente quitamos la transición de scroll suave si existe
-    document.documentElement.style.scrollBehavior = "auto";
-    window.scrollTo({
-      top: scrollTarget,
-      behavior: "auto" // 'auto' es instantáneo para evitar retrasos al arrastrar
-    });
-  }
-
-  ind.addEventListener("mousedown", function(e){
-    isDragging = true;
-    document.documentElement.style.scrollBehavior = "auto";
-    handleDrag(e.clientY);
-    e.preventDefault();
-  });
-
-  window.addEventListener("mousemove", function(e){
-    if (isDragging) {
-      handleDrag(e.clientY);
-    }
-  });
-
-  window.addEventListener("mouseup", function(){
-    if (isDragging) {
-      isDragging = false;
-      // Restauramos el comportamiento suave por defecto para clics/anclas del menú
-      document.documentElement.style.scrollBehavior = "";
-    }
-  });
-
-  // Soporte para gestos táctiles (móvil)
-  ind.addEventListener("touchstart", function(e){
-    isDragging = true;
-    document.documentElement.style.scrollBehavior = "auto";
-    if(e.touches.length > 0) {
-      handleDrag(e.touches[0].clientY);
-    }
-    e.preventDefault();
-  }, {passive: false});
-
-  window.addEventListener("touchmove", function(e){
-    if (isDragging && e.touches.length > 0) {
-      handleDrag(e.touches[0].clientY);
-    }
-  }, {passive: true});
-
-  window.addEventListener("touchend", function(){
-    isDragging = false;
-    document.documentElement.style.scrollBehavior = "";
-  });
   window.addEventListener("scroll", onScroll, {passive:true});
   onScroll();
 
-  if(ind){
-    var isDragging = false, startY = 0, startScrollY = 0;
-    ind.addEventListener("pointerdown", function(e){
+  /* ---- Drag to scroll en el indicador de scroll ---- */
+  if (ind) {
+    var isDragging = false;
+    var startY = 0;
+    var startScrollY = 0;
+
+    ind.addEventListener("pointerdown", function(e) {
       isDragging = true;
       startY = e.clientY;
       startScrollY = window.scrollY;
       ind.classList.add("dragging");
       document.documentElement.classList.add("is-dragging-scroll");
+      document.documentElement.style.scrollBehavior = "auto";
+      
+      // Jump scroll on click
+      var totalHeight = window.innerHeight;
+      var availableTrack = totalHeight - indH;
+      if (availableTrack > 0) {
+        var targetY = e.clientY - (indH / 2);
+        targetY = Math.max(0, Math.min(targetY, availableTrack));
+        var percentage = targetY / availableTrack;
+        var scrollTarget = percentage * (document.documentElement.scrollHeight - totalHeight);
+        window.scrollTo(0, scrollTarget);
+        startScrollY = scrollTarget;
+        startY = e.clientY;
+      }
       e.preventDefault();
     });
-    window.addEventListener("pointermove", function(e){
-      if(!isDragging) return;
+
+    window.addEventListener("pointermove", function(e) {
+      if (!isDragging) return;
       e.preventDefault();
-      var h = document.documentElement.scrollHeight - window.innerHeight;
-      var ratio = h > 0 ? h / (window.innerHeight - indH) : 0;
+      var totalHeight = window.innerHeight;
+      var availableTrack = totalHeight - indH;
+      if (availableTrack <= 0) return;
+      
+      var h = document.documentElement.scrollHeight - totalHeight;
+      var ratio = h > 0 ? h / availableTrack : 0;
       var deltaY = e.clientY - startY;
       window.scrollTo(0, startScrollY + deltaY * ratio);
-    }, {passive:false});
-    window.addEventListener("pointerup", function(){
-      isDragging = false;
-      ind.classList.remove("dragging");
-      document.documentElement.classList.remove("is-dragging-scroll");
-    });
-    window.addEventListener("pointercancel", function(){
-      isDragging = false;
-      ind.classList.remove("dragging");
-      document.documentElement.classList.remove("is-dragging-scroll");
-    });
+    }, { passive: false });
+
+    var stopDragging = function() {
+      if (isDragging) {
+        isDragging = false;
+        ind.classList.remove("dragging");
+        document.documentElement.classList.remove("is-dragging-scroll");
+        document.documentElement.style.scrollBehavior = "";
+      }
+    };
+
+    window.addEventListener("pointerup", stopDragging);
+    window.addEventListener("pointercancel", stopDragging);
   }
 
   /* ---- Menú móvil ---- */
