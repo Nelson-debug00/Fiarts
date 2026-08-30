@@ -6,6 +6,23 @@
   var yearEl = document.getElementById("yearNow");
   if(yearEl){ yearEl.textContent = new Date().getFullYear(); }
 
+  /* ---- Tema claro/oscuro ---- */
+  function currentTheme(){ return document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark"; }
+  function applyTheme(t){
+    document.documentElement.setAttribute("data-theme", t);
+    try{ localStorage.setItem("fiarts-theme", t); }catch(e){}
+    var lbl = document.getElementById("themeLabelM");
+    if(lbl){ lbl.textContent = (t === "light") ? "Modo oscuro" : "Modo claro"; }
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if(meta){ meta.setAttribute("content", t === "light" ? "#FBF7FF" : "#0A0A11"); }
+  }
+  function toggleTheme(){ applyTheme(currentTheme() === "light" ? "dark" : "light"); }
+  var tBtn = document.getElementById("themeToggle");
+  if(tBtn){ tBtn.addEventListener("click", toggleTheme); }
+  var tBtnM = document.getElementById("themeToggleM");
+  if(tBtnM){ tBtnM.addEventListener("click", toggleTheme); }
+  applyTheme(currentTheme());
+
   /* ---- Header scroll + barra de progreso ---- */
   var header = document.getElementById("siteHeader"),
       ind = document.getElementById("scrollIndicator"),
@@ -151,6 +168,19 @@
     var s = document.getElementById(id);
     if(s) secIO.observe(s);
   });
+
+  /* ---- Carrusel de galería (móvil) ---- */
+  var gal = document.querySelector(".gallery"),
+      galPrev = document.getElementById("galPrev"),
+      galNext = document.getElementById("galNext");
+  if(gal && galPrev && galNext){
+    var galStep = function(){
+      var item = gal.querySelector(".g-item");
+      return item ? item.getBoundingClientRect().width + 14 : gal.clientWidth;
+    };
+    galPrev.addEventListener("click", function(){ gal.scrollBy({left:-galStep(), behavior:"smooth"}); });
+    galNext.addEventListener("click", function(){ gal.scrollBy({left:galStep(), behavior:"smooth"}); });
+  }
 
   /* ---- Lightbox de galería ---- */
   var gItems = Array.prototype.slice.call(document.querySelectorAll(".g-item")),
