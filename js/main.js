@@ -26,13 +26,15 @@
   /* ---- Header scroll + barra de progreso ---- */
   var header = document.getElementById("siteHeader"),
       ind = document.getElementById("scrollIndicator"),
+      toTop = document.getElementById("toTop"),
       indH = 96,
       ticking = false;
   function onScroll(){
     if(!ticking){
       window.requestAnimationFrame(function(){
         var scrollY = window.scrollY;
-        header.classList.toggle("scrolled", scrollY > 40);
+            header.classList.toggle("scrolled", scrollY > 40);
+            if (toTop) toTop.classList.toggle("show", scrollY > 600);
         if (ind) {
           var h = document.documentElement.scrollHeight - window.innerHeight;
           var pct = h > 0 ? scrollY / h : 0;
@@ -47,6 +49,13 @@
 
   window.addEventListener("scroll", onScroll, {passive:true});
   onScroll();
+
+  /* ---- Volver arriba ---- */
+  if(toTop){
+    toTop.addEventListener("click", function(){
+      window.scrollTo({top:0, behavior: reduced ? "auto" : "smooth"});
+    });
+  }
 
   /* ---- Drag to scroll en el indicador de scroll ---- */
   if (ind) {
