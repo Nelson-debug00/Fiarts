@@ -11,16 +11,12 @@
   function applyTheme(t){
     document.documentElement.setAttribute("data-theme", t);
     try{ localStorage.setItem("fiarts-theme", t); }catch(e){}
-    var lbl = document.getElementById("themeLabelM");
-    if(lbl){ lbl.textContent = (t === "light") ? "Modo oscuro" : "Modo claro"; }
     var meta = document.querySelector('meta[name="theme-color"]');
     if(meta){ meta.setAttribute("content", t === "light" ? "#FBF7FF" : "#0A0A11"); }
   }
   function toggleTheme(){ applyTheme(currentTheme() === "light" ? "dark" : "light"); }
   var tBtn = document.getElementById("themeToggle");
   if(tBtn){ tBtn.addEventListener("click", toggleTheme); }
-  var tBtnM = document.getElementById("themeToggleM");
-  if(tBtnM){ tBtnM.addEventListener("click", toggleTheme); }
   applyTheme(currentTheme());
 
   /* ---- Header scroll + barra de progreso ---- */
